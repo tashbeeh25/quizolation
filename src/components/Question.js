@@ -6,7 +6,15 @@ import '../styles/Question.css';
 class Question extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      time: {}
+    };
+    this.interval = null; 
+  }
+
+  componentDidMount() {
+    this.startTimer();
+  
   }
   // componentDidUpdate(prevProps, prevState) {
   //   // check whether client has changed
@@ -29,13 +37,57 @@ class Question extends Component {
     return answers;
   };
 
+  startTimer = () => {
+    const countDownTime = Date.now() + 30000; 
+    //console.log("Heelooo"); 
+    this.interval = setInterval(() => {
+        const now = new Date(); 
+        const distance = countDownTime - now; 
+        //console.log(distance)
+
+        const minutes = Math.floor((distance % (1000 * 60 * 60))/ (1000 * 60)); 
+        const seconds = Math.floor((distance % (1000 * 60))/ (1000)); 
+
+       // console.log(minutes)
+        //console.log(seconds)
+
+        if (distance < 0 ){
+            clearInterval(this.interval); 
+            this.setState({
+                time : {
+                    minutes: 0, 
+                    seconds: 0
+                }
+            }, () => {
+                alert('Quiz has ended!'); 
+                this.props.history.push('/'); 
+            }); 
+        } else {
+            this.setState({
+                time: {
+                    minutes, 
+                    seconds
+                }
+            })
+        }
+    }, 1000)
+  }
+
   render() {
+
+    const {
+      time
+    } = this.state; 
+
     let renderAnswers = this.shuffleArray();
 
     return (
       <div>
         <form id="questionAnswer" onSubmit={this.props.checkAnswer}>
           <div className="questionContainer">
+            <p>
+             <span> {time.minutes}:{time.seconds} </span>
+            </p>
             <h3>Question Number: {this.props.match.params.qNumber}</h3>
             <h2 dangerouslySetInnerHTML={{__html: this.props.question.question}} />
           </div>
