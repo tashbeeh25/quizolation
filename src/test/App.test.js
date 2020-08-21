@@ -1,19 +1,41 @@
 import App from '../App';
 import { shallow } from 'enzyme';
-import React from 'react';
-import NavBar from "../components/NavBar";
+import Navbar from '../components/Navbar';
+import { Route } from 'react-router-dom';
 
 describe('App', () => {
-    let wrapper;
-    let container, containerProp;
+    let wrapper, navlink, Switch;
+
     beforeEach(() => {
-        wrapper = shallow(<App />)
-        container = wrapper.find("main"); 
-        //containerProp = container.props(); 
+        wrapper = shallow(<App />); 
+        navlink = wrapper.find("NavLink"); 
+        Switch = wrapper.find("Switch")
     });
 
+    test('Renders app', () => {
+        expect(wrapper).toExist;
+    });
 
-    it("should have a <main>", () => {
-        expect(container).toHaveLength(1); 
+    test('Navbar to exist', () => {
+        expect(navlink).toExist; 
     })
-}); 
+
+    test('Switch to exist', () => {
+        expect(Switch).toExist; 
+    }); 
+
+    test("Check h1 to exist", () => {
+      
+        expect(wrapper.find("h1")).toExist;
+    });
+    
+    //   test('contains Routes', () => {
+    //     expect(wrapper.containsMatchingElement(<Route />)).toEqual(true);
+    //   });
+
+    //   test('contains 5 Routes', () => {
+    //     expect((wrapper.find('Route').length)).toEqual(4);
+    //   });
+    
+
+});
