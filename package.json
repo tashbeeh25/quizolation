@@ -1,15 +1,13 @@
 {
   "name": "react",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode-development",
     "build": "webpack -p",
-    "test": "jest --watch --setupFiles ./src/test/setupTests.js"
-
+    "test": "jest --watch --setupFiles ./src/test/setupTests.js",
+    "coverage": "jest --setupFiles ./src/test/setupTests.js --coverage --watchAll=false"
   },
-
   "jest": {
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
@@ -44,5 +42,15 @@
     "react-spotify-api": "^3.0.0",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tashbeeh25/quizolation.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/tashbeeh25/quizolation/issues"
+  },
+  "homepage": "https://github.com/tashbeeh25/quizolation#readme",
+  "description": ""
 }
